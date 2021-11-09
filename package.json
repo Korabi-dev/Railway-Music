@@ -1,0 +1,22 @@
+{
+  "name": "railway-music",
+  "version": "1.2.6",
+  "description": "A package that complies with railway's rules on playing music, but still lets you play music.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Railway",
+    "Music"
+  ],
+  "author": "Korab Arifi",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  },
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "erela.js": "^2.3.3"
+  }
+}
