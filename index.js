@@ -36,7 +36,7 @@ class RailwayMusicClient {
 					console.warn(
 						`One of your nodes "${
 							node.host ? node.host : "Unknown"
-						}" can't be loaded, please check and verify it has all required info.`
+						}" can't be loaded, please check and verify it has all required info. Example of good node:\n{host: "korabi69.com", port: 80, password: "uwupower123"}`
 					);
 				}
 			});

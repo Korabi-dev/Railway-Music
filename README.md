@@ -191,6 +191,13 @@ MusicClient.manager.on("trackStart", (player, track) => {
 
 ## Documentation:
 
+## MusicClient Constructor
+
+```js
+new RailwayMusic(MusicClientOptions);
+```
+* MusicClientOptions:<br><h5>Type: `Object`</h5><h5>Properties: {nodes?: `Array`, defaultLogs: `Boolean`, clientID: `String`, clientToken: `String`}</h5><h5>Required: Yes</h5>
+
 
 ## Play Function
 
