@@ -191,13 +191,20 @@ MusicClient.manager.on("trackStart", (player, track) => {
 
 ## Documentation:
 
+* Note:<br>
+	If a property has "?" at the end of its name, it means said property is optional.
+
+
 ## MusicClient Constructor
 
 ```js
 new RailwayMusic(MusicClientOptions);
 ```
-* MusicClientOptions:<br><h5>Type: `Object`</h5><h5>Properties: {nodes?: `Array`, defaultLogs: `Boolean`, clientID: `String`, clientToken: `String`}</h5><h5>Required: Yes</h5>
+* MusicClientOptions:<br><h5>Type: `Object`</h5><h5>Properties: {nodes?: `Array<{host: String, port: Number, password: String}>`, autoReply?: `Object<{enabled: Boolean,   	 	 	funtionNameTitle?: String, functionNameDescription?: String, embedColor: DiscordJsColorResolvable}>`, defaultLogs: `Boolean`, clientID: `String`, clientToken: `String`}</h5><h5>Required: Yes</h5>
 
+* Notes:<br>
+<h5>You can put "{author}", "{title}", or "{url}" in `MusicClientOptions.autoReply.playDescription`, and "{volume}" in `MusicClientOptions.autoReply.setVolumeDescription`, It will be replace with the appropriate info.</h5>
+<h5>Do not literally type out "functionNameTitle" or "functionNameDescription" instead you have to replace "functionName" with a valid function name, say you wanted to skip a song; You would want to set the "skipTitle" and "skipDescription" values.</h5>
 
 ## Play Function
 

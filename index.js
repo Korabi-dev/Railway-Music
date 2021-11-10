@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable quotes */
 "use strict";
 
@@ -10,6 +11,7 @@ class RailwayMusicClient {
 		required.map((option) => {
 			if (!options[option]) throw new SyntaxError(`Missing option "${option}"`);
 		});
+		this.options = options;
 		this.client = new discord.Client({
 			intents: [discord.Intents.FLAGS.GUILD_VOICE_STATES]
 		});
@@ -65,6 +67,17 @@ class RailwayMusicClient {
 		this.client.login(options.clientToken);
 		this.manager.init(options.clientID);
 	}
+	embed = function (Title, Description, Footer) {
+		const embed = new discord.MessageEmbed().setColor(
+			this.options.autoReply.embedColor
+				? this.options.autoReply.embedColor
+				: "NOT_QUITE_BLACK"
+		);
+		if (Title) embed.setTitle(String(Title));
+		if (Description) embed.setDescription(Description);
+		if (Footer) embed.setFooter(String(Footer));
+		return embed;
+	};
 	play = async function (options = {}) {
 		if (!options.song || !options.message)
 			throw new SyntaxError('Missing "message", "song", or all options.');
@@ -85,6 +98,23 @@ class RailwayMusicClient {
 		player.connect();
 		player.queue.add(res.tracks[0]);
 		if (!player.playing && !player.paused && !player.queue.size) player.play();
+		if (this.options.autoReply.enabled) {
+			options.message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.playTitle
+							? this.options.autoReply.playTitle
+							: "Song Found!",
+						this.options.autoReply.playDescription
+							? this.options.autoReply.playDescription
+								.replace(/{title}/g, res.tracks[0].title)
+								.replace(/{url}/g, res.tracks[0].uri)
+								.replace(/{author}/g, res.tracks[0].author)
+							: `Enqueueing **${res.tracks[0].title}**`
+					)
+				]
+			});
+		}
 		return res;
 	};
 	stop = async function (message) {
@@ -93,6 +123,20 @@ class RailwayMusicClient {
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
 		if (!player) throw new Error("There is no music playing.");
+		if (this.options.autoReply.enabled) {
+			message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.stopTitle
+							? this.options.autoReply.stopTitle
+							: "Ended Queue!",
+						this.options.autoReply.stopDescription
+							? this.options.autoReply.stopDescription
+							: "I stopped playing music, and left the voice channel."
+					)
+				]
+			});
+		}
 		return await player.destroy();
 	};
 	setVolume = async function (options = {}) {
@@ -105,6 +149,23 @@ class RailwayMusicClient {
 		if (isNaN(options.volume)) options.volume = 50;
 		if (options.volume > 100) options.volume = 100;
 		if (options.volume < 1) options.volume = 1;
+		if (this.options.autoReply.enabled) {
+			options.message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.setVolumeTitle
+							? this.options.autoReply.setVolumeTitle
+							: "Volume Set",
+						this.options.autoReply.setVolumeDescription
+							? this.options.autoReply.setVolumeDescription.replace(
+								/{volume}/g,
+								String(options.volume)
+							  )
+							: `Set the volume to **${String(options.volume)}**.`
+					)
+				]
+			});
+		}
 		return await player.setVolume(options.volume);
 	};
 	skip = async function (message) {
@@ -113,6 +174,20 @@ class RailwayMusicClient {
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
 		if (!player) throw new Error("There is no music playing.");
+		if (this.options.autoReply.enabled) {
+			message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.skipTitle
+							? this.options.autoReply.skipTitle
+							: "Skipped Song!",
+						this.options.autoReply.stopDescription
+							? this.options.autoReply.skipDescription
+							: "I have skipped the currently playing song."
+					)
+				]
+			});
+		}
 		return await player.stop();
 	};
 	pause = async function (message) {
@@ -121,6 +196,20 @@ class RailwayMusicClient {
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
 		if (!player) throw new Error("There is no music playing.");
+		if (this.options.autoReply.enabled) {
+			message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.pauseTitle
+							? this.options.autoReply.pauseTitle
+							: "Paused Song!",
+						this.options.autoReply.pauseDescription
+							? this.options.autoReply.pauseDescription
+							: "I have paused the currently playing song."
+					)
+				]
+			});
+		}
 		return await player.pause(true);
 	};
 	resume = async function (message) {
@@ -129,6 +218,20 @@ class RailwayMusicClient {
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
 		if (!player) throw new Error("There is no music playing.");
+		if (this.options.autoReply.enabled) {
+			message.reply({
+				embeds: [
+					this.embed(
+						this.options.autoReply.resumeTitle
+							? this.options.autoReply.resumeTitle
+							: "Resumed Song!",
+						this.options.autoReply.resumeDescription
+							? this.options.autoReply.resumeDescription
+							: "I have resumed the currently playing song."
+					)
+				]
+			});
+		}
 		return await player.pause(false);
 	};
 }
