@@ -1,6 +1,6 @@
 {
   "name": "railway-music",
-  "version": "1.2.6",
+  "version": "1.2.9",
   "description": "A package that complies with railway's rules on playing music, but still lets you play music.",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,7 @@
   "dependencies": {
     "discord.js": "^13.3.1",
     "erela.js": "^2.3.3"
-  }
+  },
+  "repository": "https://github.com/Korabi-dev/Railway-Music.git",
+  "homepage": "https://railway.app/?referralCode=Korabi-Dev"
 }
