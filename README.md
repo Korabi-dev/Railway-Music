@@ -260,4 +260,21 @@ MusicClient.resume(Message);
 
 - Message:<br><h5>Type: `Discord.js Message Object`</h5><h5>Required: Yes</h5>
 
+
+## LoopTrack Function
+
+```js
+MusicClient.loopTrack(Message);
+```
+
+- Message:<br><h5>Type: `Discord.js Message Object`</h5><h5>Required: Yes</h5>
+
+## LoopQueue Function
+
+```js
+MusicClient.loopQueue(Message);
+```
+
+- Message:<br><h5>Type: `Discord.js Message Object`</h5><h5>Required: Yes</h5>
+
 * If you have any questions about this package join the [official railway discord server](discord.gg/railway) and ping me (Korabi <3#6251) in the chat.
