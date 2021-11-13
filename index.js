@@ -10,7 +10,7 @@ class RailwayMusicClient {
 	constructor(options = {}) {
 		const required = ["clientID", "clientToken", "defaultLogs"];
 		required.map((option) => {
-			if (!options[option]) throw new SyntaxError(`Missing option "${option}"`);
+			if (!options[option]) throw new Error(`Missing option "${option}"`);
 		});
 		this.options = options;
 		this.client = new discord.Client({
@@ -81,7 +81,7 @@ class RailwayMusicClient {
 	};
 	play = async function (options = {}) {
 		if (!options.song || !options.message)
-			throw new SyntaxError('Missing "message", "song", or all options.');
+			throw new Error('Missing "message", "song", or all options.');
 		if (!options.message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const search = options.song;
@@ -119,7 +119,7 @@ class RailwayMusicClient {
 		return res;
 	};
 	stop = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -142,7 +142,7 @@ class RailwayMusicClient {
 	};
 	setVolume = async function (options = {}) {
 		if (!options.volume || !options.message)
-			throw new SyntaxError('Missing "message", "volume", or all options.');
+			throw new Error('Missing "message", "volume", or all options.');
 		if (!options.message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(options.message.guild.id);
@@ -170,7 +170,7 @@ class RailwayMusicClient {
 		return await player.setVolume(options.volume);
 	};
 	skip = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -192,7 +192,7 @@ class RailwayMusicClient {
 		return await player.stop();
 	};
 	pause = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -214,7 +214,7 @@ class RailwayMusicClient {
 		return await player.pause(true);
 	};
 	resume = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -236,7 +236,7 @@ class RailwayMusicClient {
 		return await player.pause(false);
 	};
 	loopTrack = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -250,7 +250,7 @@ class RailwayMusicClient {
 			res = "Started";
 		}
 		if (this.options.autoReply?.enabled) {
-			 await message.reply({
+			await message.reply({
 				embeds: [
 					this.embed(
 						this.options.loopTrackTitle
@@ -266,7 +266,7 @@ class RailwayMusicClient {
 		return player;
 	};
 	loopQueue = async function (message) {
-		if (!message) throw new SyntaxError("No message provided.");
+		if (!message) throw new Error("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -280,7 +280,7 @@ class RailwayMusicClient {
 			res = "Started";
 		}
 		if (this.options.autoReply?.enabled) {
-			 await message.reply({
+			await message.reply({
 				embeds: [
 					this.embed(
 						this.options.loopQueueTitle
