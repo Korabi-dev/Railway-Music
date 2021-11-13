@@ -236,7 +236,7 @@ class RailwayMusicClient {
 		return await player.pause(false);
 	};
 	loopTrack = async function (message) {
-		if (message) throw new SyntaxError("No message provided.");
+		if (!message) throw new SyntaxError("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
@@ -266,7 +266,7 @@ class RailwayMusicClient {
 		return player;
 	};
 	loopQueue = async function (message) {
-		if (message) throw new SyntaxError("No message provided.");
+		if (!message) throw new SyntaxError("No message provided.");
 		if (!message.member.voice.channel)
 			throw new Error("Member not in voice channel.");
 		const player = this.manager.players.get(message.guild.id);
