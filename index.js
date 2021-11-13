@@ -253,11 +253,11 @@ class RailwayMusicClient {
 			await message.reply({
 				embeds: [
 					this.embed(
-						this.options.loopTrackTitle
-							? this.options.loopTrackTitle
+						this.options.autoReply.loopTrackTitle
+							? this.options.autoReply.loopTrackTitle
 							: `${res} Loop.`,
-						this.options.loopTrackDescription
-							? this.options.loopTrackDescription
+						this.options.autoReply.loopTrackDescription
+							? this.options.autoReply.loopTrackDescription
 							: `${res} looping the currently playing song.`
 					)
 				]
@@ -283,11 +283,11 @@ class RailwayMusicClient {
 			await message.reply({
 				embeds: [
 					this.embed(
-						this.options.loopQueueTitle
-							? this.options.loopQueueTitle
+						this.options.autoReply.loopQueueTitle
+							? this.options.autoReply.loopQueueTitle
 							: `${res} Loop.`,
-						this.options.loopQueueDescription
-							? this.options.loopQueueDescription
+						this.options.autoReply.loopQueueDescription
+							? this.options.autoReply.loopQueueDescription
 							: `${res} looping the current queue.`
 					)
 				]
