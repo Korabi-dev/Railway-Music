@@ -37,8 +37,7 @@ class RailwayMusicClient {
 					this.nodes.push(node);
 				} else {
 					console.warn(
-						`One of your nodes "${
-							node.host ? node.host : "Unknown"
+						`One of your nodes "${node.host ? node.host : "Unknown"
 						}" can't be loaded, please check and verify it has all required info. Example of good node:\n{host: "korabi69.com", port: 80, password: "uwupower123"}`
 					);
 				}
@@ -108,9 +107,9 @@ class RailwayMusicClient {
 							: "Song Found!",
 						this.options.autoReply.playDescription
 							? this.options.autoReply.playDescription
-									.replace(/{title}/g, res.tracks[0].title)
-									.replace(/{url}/g, res.tracks[0].uri)
-									.replace(/{author}/g, res.tracks[0].author)
+								.replace(/{title}/g, res.tracks[0].title)
+								.replace(/{url}/g, res.tracks[0].uri)
+								.replace(/{author}/g, res.tracks[0].author)
 							: `Enqueueing **${res.tracks[0].title}**`
 					)
 				]
@@ -159,9 +158,9 @@ class RailwayMusicClient {
 							: "Volume Set",
 						this.options.autoReply.setVolumeDescription
 							? this.options.autoReply.setVolumeDescription.replace(
-									/{volume}/g,
-									String(options.volume)
-							  )
+								/{volume}/g,
+								String(options.volume)
+							)
 							: `Set the volume to **${String(options.volume)}**.`
 					)
 				]
